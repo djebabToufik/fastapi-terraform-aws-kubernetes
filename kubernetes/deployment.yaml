@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: portfolio
+spec:
+  selector:
+    matchLabels:
+      app: fastapi-test
+  replicas: 2 # tells deployment to run 2 pods matching the template
+  template:
+    metadata:
+      labels:
+        app: fastapi-test
+    spec:
+      containers:
+      - name: fastapi-test
+        image: aws-id.dkr.ecr.[region].amazonaws.com/fastapi-test:latest # make sure to put the right image url
+        # imagePullPolicy: "Never"
+        ports:
+        - containerPort: 8000
+        env:
+            - name: UVICORN_CMD_ARGS
+              value: "--host 0.0.0.0 --port 8000"
+        
