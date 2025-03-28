@@ -44,8 +44,9 @@ spec:
       - name: fastapi-test
         image: aws-id.dkr.ecr.[region].amazonaws.com/fastapi-test:latest # make sure to put the right image url
 ```
-- deploy the pods 
+- configure kubectl with the new aws eks and deploy the pods 
 ```sh
+aws eks update-kubeconfig --region region-code --name my-cluster # replace the region-code and my-cluster name
 kubectl apply -f deployment.yaml
 kubectl apply -f service.yaml
 ```
